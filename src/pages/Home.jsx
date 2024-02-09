@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { JSONFileURL } from "../config";
 import DigitalClock from "../components/DigitalClock";
 import SingleDate from "../components/SingleDate";
 import LatestStats from "../components/LatestStats";
 import { getDateTime } from "../util";
+import LineGraph from "../components/LineGraph";
 
 export default function Home() {
-  const [data, setData] = useState([]);
-
   const [hour, setHour] = useState(null);
   const [minute, setMinute] = useState(null);
   const [amPm, setAmPm] = useState(null);
@@ -17,6 +16,17 @@ export default function Home() {
   const [date, setDate] = useState(null);
   const [latestStats, setLatestStats] = useState(null);
   const [secondLatestStats, setSecondLatestStats] = useState(null);
+  const [xAxis, setXAxis] = useState([]);
+  const [tvNFilesY, setTvNFilesY] = useState([]);
+  const [moviesNFilesY, setMoviesNFilesY] = useState([]);
+  const [tvHoursY, setTvHoursY] = useState([]);
+  const [moviesHoursY, setMoviesHoursY] = useState([]);
+  const [tvSizeY, setTvSizeY] = useState([]);
+  const [moviesSizeY, setMoviesSizeY] = useState([]);
+  const [totalNFilesY, setTotalNFilesY] = useState([]);
+  const [totalHoursY, setTotalHoursY] = useState([]);
+  const [totalSizeY, setTotalSizeY] = useState([]);
+  const graphColor = Math.floor(Math.random() * 3) + 1;
 
   const getFileData = async () => {
     try {
@@ -24,11 +34,7 @@ export default function Home() {
       const response = await fetch(JSONFileURL);
       const responseData = await response.json();
 
-      console.log("response", response);
-
       if (response.ok) {
-        setData(responseData);
-
         // ------ clock state ------
         const dateData = getDateTime(
           responseData[responseData.length - 1].time
@@ -46,6 +52,43 @@ export default function Home() {
         setLatestStats(latestStats);
         const secondLatestStats = responseData[responseData.length - 2];
         setSecondLatestStats(secondLatestStats);
+
+        // ------ graph data ------
+        let xAxis = [];
+        let tvNFilesY = [];
+        let moviesNFilesY = [];
+        let tvHoursY = [];
+        let moviesHoursY = [];
+        let tvSizeY = [];
+        let moviesSizeY = [];
+        let totalNFilesY = [];
+        let totalHoursY = [];
+        let totalSizeY = [];
+
+        responseData.forEach((data) => {
+          const date = new Date(data.time);
+          xAxis.push(date);
+          tvNFilesY.push(data.tv.n_files);
+          moviesNFilesY.push(data.movies.n_files);
+          tvHoursY.push(data.tv.hours);
+          moviesHoursY.push(data.movies.hours);
+          tvSizeY.push(data.tv.size);
+          moviesSizeY.push(data.movies.size);
+          totalNFilesY.push(data.tv.n_files + data.movies.n_files);
+          totalHoursY.push(data.tv.hours + data.movies.hours);
+          totalSizeY.push(data.tv.size + data.movies.size);
+        });
+
+        setXAxis(xAxis);
+        setTvNFilesY(tvNFilesY);
+        setMoviesNFilesY(moviesNFilesY);
+        setTvHoursY(tvHoursY);
+        setMoviesHoursY(moviesHoursY);
+        setTvSizeY(tvSizeY);
+        setMoviesSizeY(moviesSizeY);
+        setTotalNFilesY(totalNFilesY);
+        setTotalHoursY(totalHoursY);
+        setTotalSizeY(totalSizeY);
       } else {
         console.error("Data Fetch Failed");
       }
@@ -60,7 +103,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="hidden bg-red-500 bg-blue-500"></div>
+      <div className="hidden bg-red-500 bg-blue-500 border-red-500"></div>
       <div className="flex flex-col">
         <div className="flex flex-row space-x-4 gap-x-1 gap-y-1 p-4 landing-container min-h-[100vh]">
           <div className="w-2/5 left-item flex flex-col justify-center">
@@ -95,6 +138,8 @@ export default function Home() {
                     title={"Files"}
                     tvValue={latestStats.tv.n_files}
                     moviesValue={latestStats.movies.n_files}
+                    oldTvValue={secondLatestStats.tv.n_files}
+                    oldMovieValue={secondLatestStats.movies.n_files}
                   />
                 )}
               </div>
@@ -104,6 +149,8 @@ export default function Home() {
                     title={"Hours"}
                     tvValue={latestStats.tv.hours}
                     moviesValue={latestStats.movies.hours}
+                    oldTvValue={secondLatestStats.tv.hours}
+                    oldMovieValue={secondLatestStats.movies.hours}
                   />
                 )}
               </div>
@@ -113,15 +160,44 @@ export default function Home() {
                     title={"Size (GB)"}
                     tvValue={latestStats.tv.size}
                     moviesValue={latestStats.movies.size}
+                    oldTvValue={secondLatestStats.tv.size}
+                    oldMovieValue={secondLatestStats.movies.size}
                   />
                 )}
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-blue-100">graph 1</div>
-        <div className="bg-amber-100">graph 2</div>
-        <div className="bg-gray-100">graph 3</div>
+        <div className="h-[75vh] mt-20 mb-20 p-4">
+          <LineGraph
+            title={"Files vs Date"}
+            totalList={totalNFilesY}
+            tvList={tvNFilesY}
+            moviesList={moviesNFilesY}
+            xAxis={xAxis}
+            graphColor={graphColor}
+          />
+        </div>
+        <div className="h-[75vh] mt-20 mb-20 p-4">
+          <LineGraph
+            title={"Hours vs Date"}
+            totalList={totalHoursY}
+            tvList={tvHoursY}
+            moviesList={moviesHoursY}
+            xAxis={xAxis}
+            graphColor={graphColor}
+          />
+        </div>
+        <div className="h-[75vh] mt-20 mb-20 p-4">
+          <LineGraph
+            title={"Size (GB) vs Date"}
+            totalList={totalSizeY}
+            tvList={tvSizeY}
+            moviesList={moviesSizeY}
+            xAxis={xAxis}
+            graphColor={graphColor}
+          />
+        </div>
       </div>
     </Layout>
   );
