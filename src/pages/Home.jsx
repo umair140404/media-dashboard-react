@@ -30,7 +30,7 @@ export default function Home() {
   //   Math.floor(Math.random() * 3) + 1
   // );
 
-  const graphColor = 2
+  const graphColor = 2;
 
   const getFileData = async () => {
     try {
@@ -111,7 +111,7 @@ export default function Home() {
       <div className="flex flex-col">
         <div className="flex flex-row space-x-4 gap-x-1 gap-y-1 p-4 landing-container min-h-[100vh]">
           <div className="w-2/5 left-item flex flex-col justify-center">
-            <h1 className="text-4xl font-bold text-gray-100 text-center mt-auto">
+            <h1 className="text-4xl font-bold text-gray-100 text-center mt-28 md:mt-auto">
               Umair's Home Media Server
             </h1>
             <div>
@@ -127,7 +127,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-auto text-center">
+            <div className="mt-auto text-center hidden md:block">
               <div className="flex flex-col">
                 <div>© Umair Yousaf</div>
                 <div>Version 2.0</div>
@@ -172,35 +172,47 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-[75vh] mt-20 mb-20 p-4">
-          <LineGraph
-            title={"Files vs Date"}
-            totalList={totalNFilesY}
-            tvList={tvNFilesY}
-            moviesList={moviesNFilesY}
-            xAxis={xAxis}
-            graphColor={graphColor}
-          />
+        <div className="overflow-x-scroll mt-20 mb-20">
+          <div className="w-full text-center text-3xl md:text-4xl font-bold text-gray-100 mb-8 fixed absolute inset-x-0 left-1/2 transform -translate-x-1/2">
+            Files vs Date
+          </div>
+          <div className="h-[75vh] md:p-4 w-[175vw] md:w-full mt-40 md:mt-20">
+            <LineGraph
+              totalList={totalNFilesY}
+              tvList={tvNFilesY}
+              moviesList={moviesNFilesY}
+              xAxis={xAxis}
+              graphColor={graphColor}
+            />
+          </div>
         </div>
-        <div className="h-[75vh] mt-20 mb-20 p-4">
-          <LineGraph
-            title={"Runtime (Hours) vs Date"}
-            totalList={totalHoursY}
-            tvList={tvHoursY}
-            moviesList={moviesHoursY}
-            xAxis={xAxis}
-            graphColor={graphColor}
-          />
+        <div className="overflow-x-scroll mt-20 mb-20">
+          <div className="w-full text-center text-3xl md:text-4xl font-bold text-gray-100 mb-8 fixed absolute inset-x-0 left-1/2 transform -translate-x-1/2">
+            Runtime (Hours) vs Date
+          </div>
+          <div className="h-[75vh] md:p-4 w-[175vw] md:w-full mt-40 md:mt-20">
+            <LineGraph
+              totalList={totalHoursY}
+              tvList={tvHoursY}
+              moviesList={moviesHoursY}
+              xAxis={xAxis}
+              graphColor={graphColor}
+            />
+          </div>
         </div>
-        <div className="h-[75vh] mt-20 mb-20 p-4">
-          <LineGraph
-            title={"Content Size (GB) vs Date"}
-            totalList={totalSizeY}
-            tvList={tvSizeY}
-            moviesList={moviesSizeY}
-            xAxis={xAxis}
-            graphColor={graphColor}
-          />
+        <div className="overflow-x-scroll mt-20 mb-20">
+          <div className="w-full text-center text-3xl md:text-4xl font-bold text-gray-100 mb-8 fixed absolute inset-x-0 left-1/2 transform -translate-x-1/2">
+            Content Size (GB) vs Date
+          </div>
+          <div className="h-[75vh] md:p-4 w-[175vw] md:w-full mt-40 md:mt-20">
+            <LineGraph
+              totalList={totalSizeY}
+              tvList={tvSizeY}
+              moviesList={moviesSizeY}
+              xAxis={xAxis}
+              graphColor={graphColor}
+            />
+          </div>
         </div>
       </div>
     </Layout>

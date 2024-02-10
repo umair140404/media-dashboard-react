@@ -22,20 +22,33 @@ const LineGraph = ({
 
   return (
     <div className="h-full">
-      <div className="text-center">
-        <div className="text-4xl font-bold text-gray-100 mb-8">{title}</div>
-      </div>
       <LineChart
         series={[
-          { data: totalList, label: "Total", area: true },
+          {
+            data: totalList,
+            label: "Total",
+            area: true,
+            yAxisKey: "rightAxisId",
+          },
           { data: tvList, label: "TV", area: true },
-          { data: moviesList, label: "Movies", area: true },
+          {
+            data: moviesList,
+            label: "Movies",
+            area: true,
+          },
         ]}
         xAxis={[{ data: xAxis, scaleType: "time" }]}
+        yAxis={[{ id: "rightAxisId" }]}
+        rightAxis="rightAxisId"
         colors={colorPalette[graphColor]}
         sx={{
           //change left yAxis label styles
           "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+            strokeWidth: "0.4",
+            fill: "#FFFFFF",
+          },
+          //change right yAxis label styles
+          "& .MuiChartsAxis-right .MuiChartsAxis-tickLabel": {
             strokeWidth: "0.4",
             fill: "#FFFFFF",
           },

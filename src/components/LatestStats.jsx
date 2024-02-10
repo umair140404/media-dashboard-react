@@ -23,43 +23,34 @@ const LatestStats = ({
       <div className="text-center mb-8 text-3xl text-gray-100 font-bold">
         {title}
       </div>
-      <div className="flex w-full">
-        <div className="w-9/12">
+      <div className="flex flex-col w-full md:flex-row items-center">
+        <div className="w-full md:w-9/12 md:mr-2">
           <div className="flex items-center h-8">
-            <div className="w-1/12 font-bold">TV</div>
-            <div className="w-9/12 pr-2 pl-4">
+            <div className="w-2/12 md:w-1/12 font-bold">TV</div>
+            <div className="w-10/12 md:w-11/12 pr-2 pl-4">
               <HorizontalBar total={total} value={tvValue} barColor={"tv"} />
-            </div>
-            <div className="w-2/12">
-              <div className="text-accent text-center font-mono text-sm">
-                {roundIfDecimal(tvValue)} ({Math.round((tvValue / total) * 100)}
-                %)
-              </div>
             </div>
           </div>
           <div className="flex items-center h-8">
-            <div className="w-1/12 font-bold">Movies</div>
-            <div className="w-9/12 pr-2 pl-4">
+            <div className="w-2/12 md:w-1/12 font-bold">Movies</div>
+            <div className="w-10/12 md:w-11/12 pr-2 pl-4">
               <HorizontalBar
                 total={total}
                 value={moviesValue}
                 barColor={"movies"}
               />
             </div>
-            <div className="w-2/12">
-              <div className="text-accent text-center font-mono text-sm">
-                {roundIfDecimal(moviesValue)} (
-                {Math.round((moviesValue / total) * 100)}
-                %)
-              </div>
-            </div>
           </div>
         </div>
-        <div className="w-3/12 flex items-center justify-center bg-secondary rounded  ml-2">
+        <div className="w-3/5 h-16 md:w-3/12 md:ml-0 mt-2 md:mt-0 flex items-center justify-center bg-secondary rounded">
           <div className="text-2xl font-mono text-accent mr-5">
             {roundIfDecimal(total)}
           </div>
-          <Tooltip title={`Previous value: ${roundIfDecimal(oldTotal)}`}>
+          <Tooltip
+            title={`Previous value: ${roundIfDecimal(oldTotal)}`}
+            arrow
+            enterTouchDelay={0}
+          >
             <div>
               <Triangle
                 size={25}
