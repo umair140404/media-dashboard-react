@@ -27,7 +27,7 @@ const DigitalClock = ({ hour, minute, amPm }) => {
       </span>
       <span
         ref={spanRef}
-        className="flex items-center justify-center flex-grow text-5xl w-1/3 bg-white rounded text-red-500 font-bold font-mono am-pm"
+        className="flex items-center justify-center flex-grow text-5xl w-1/3 bg-white rounded text-movies font-bold font-mono am-pm"
       >
         {amPm}
       </span>

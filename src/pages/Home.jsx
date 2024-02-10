@@ -26,7 +26,11 @@ export default function Home() {
   const [totalNFilesY, setTotalNFilesY] = useState([]);
   const [totalHoursY, setTotalHoursY] = useState([]);
   const [totalSizeY, setTotalSizeY] = useState([]);
-  const graphColor = Math.floor(Math.random() * 3) + 1;
+  // const [graphColor, setGraphColor] = useState(
+  //   Math.floor(Math.random() * 3) + 1
+  // );
+
+  const graphColor = 2
 
   const getFileData = async () => {
     try {
@@ -103,7 +107,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="hidden bg-red-500 bg-blue-500 border-red-500"></div>
+      <div className="hidden bg-red-500 bg-blue-500 border-red-500 bg-tv bg-movies"></div>
       <div className="flex flex-col">
         <div className="flex flex-row space-x-4 gap-x-1 gap-y-1 p-4 landing-container min-h-[100vh]">
           <div className="w-2/5 left-item flex flex-col justify-center">
@@ -146,7 +150,7 @@ export default function Home() {
               <div className="p-4">
                 {latestStats && (
                   <LatestStats
-                    title={"Hours"}
+                    title={"Runtime (Hours)"}
                     tvValue={latestStats.tv.hours}
                     moviesValue={latestStats.movies.hours}
                     oldTvValue={secondLatestStats.tv.hours}
@@ -157,7 +161,7 @@ export default function Home() {
               <div className="p-4">
                 {latestStats && (
                   <LatestStats
-                    title={"Size (GB)"}
+                    title={"Content Size (GB)"}
                     tvValue={latestStats.tv.size}
                     moviesValue={latestStats.movies.size}
                     oldTvValue={secondLatestStats.tv.size}
@@ -180,7 +184,7 @@ export default function Home() {
         </div>
         <div className="h-[75vh] mt-20 mb-20 p-4">
           <LineGraph
-            title={"Hours vs Date"}
+            title={"Runtime (Hours) vs Date"}
             totalList={totalHoursY}
             tvList={tvHoursY}
             moviesList={moviesHoursY}
@@ -190,7 +194,7 @@ export default function Home() {
         </div>
         <div className="h-[75vh] mt-20 mb-20 p-4">
           <LineGraph
-            title={"Size (GB) vs Date"}
+            title={"Content Size (GB) vs Date"}
             totalList={totalSizeY}
             tvList={tvSizeY}
             moviesList={moviesSizeY}

@@ -28,7 +28,7 @@ const LatestStats = ({
           <div className="flex items-center h-8">
             <div className="w-1/12 font-bold">TV</div>
             <div className="w-9/12 pr-2 pl-4">
-              <HorizontalBar total={total} value={tvValue} barColor={"red"} />
+              <HorizontalBar total={total} value={tvValue} barColor={"tv"} />
             </div>
             <div className="w-2/12">
               <div className="text-accent text-center font-mono text-sm">
@@ -43,7 +43,7 @@ const LatestStats = ({
               <HorizontalBar
                 total={total}
                 value={moviesValue}
-                barColor={"blue"}
+                barColor={"movies"}
               />
             </div>
             <div className="w-2/12">
