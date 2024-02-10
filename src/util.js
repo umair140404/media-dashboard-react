@@ -47,3 +47,22 @@ export const getDateTime = (dateString) => {
     ampm,
   };
 };
+
+export const calculateTimeDifference = (date1, date2) => {
+  const diffMs = Math.abs(date2 - date1);
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const diffHours = Math.floor(
+    (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  if (diffDays >= 30) {
+    return `${diffDays} days`;
+  } else if (diffDays >= 1) {
+    return `${diffDays} days, ${diffHours.toString().padStart(2, "0")} hours`;
+  } else {
+    return `${diffHours} hours, ${diffMinutes
+      .toString()
+      .padStart(2, "0")} minutes`;
+  }
+};

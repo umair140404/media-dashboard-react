@@ -42,25 +42,25 @@ const LatestStats = ({
             </div>
           </div>
         </div>
-        <div className="w-3/5 h-16 md:w-3/12 md:ml-0 mt-2 md:mt-0 flex items-center justify-center bg-secondary rounded">
-          <div className="text-2xl font-mono text-accent mr-5">
-            {roundIfDecimal(total)}
-          </div>
+        <div className="w-3/5 md:w-3/12 md:ml-0 mt-2 md:mt-0">
           <Tooltip
             title={`Previous value: ${roundIfDecimal(oldTotal)}`}
             arrow
             enterTouchDelay={0}
           >
-            <div>
-              <Triangle
-                size={25}
-                color={triangleColor}
-                rotate={!valueIncreased}
-              />
+            <div className="flex items-center justify-center bg-secondary rounded h-16">
+              <div className="text-2xl font-mono text-accent mr-5">
+                {roundIfDecimal(total)}
+              </div>
+              <div>
+                <Triangle
+                  size={25}
+                  color={triangleColor}
+                  rotate={!valueIncreased}
+                />
+              </div>
+              <div className="ml-2">{roundIfDecimal(valueDiffPercentage)}%</div>
             </div>
-          </Tooltip>
-          <Tooltip title={`Previous value: ${roundIfDecimal(oldTotal)}`}>
-            <div className="ml-2">{roundIfDecimal(valueDiffPercentage)}%</div>
           </Tooltip>
         </div>
       </div>

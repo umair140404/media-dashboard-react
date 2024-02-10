@@ -6,6 +6,7 @@ import SingleDate from "../components/SingleDate";
 import LatestStats from "../components/LatestStats";
 import { getDateTime } from "../util";
 import LineGraph from "../components/LineGraph";
+import { calculateTimeDifference } from "../util";
 
 export default function Home() {
   const [hour, setHour] = useState(null);
@@ -126,10 +127,13 @@ export default function Home() {
                   <DigitalClock hour={hour} minute={minute} amPm={amPm} />
                 </div>
               </div>
+              <div className="text-accent mb-20 mt-20 text-xl text-center">
+                {calculateTimeDifference(xAxis[xAxis.length - 1], new Date())}{" "}
+                ago
+              </div>
             </div>
             <div className="mt-auto text-center hidden md:block">
               <div className="flex flex-col">
-                <div>© Umair Yousaf</div>
                 <div>Version 2.0</div>
               </div>
             </div>
