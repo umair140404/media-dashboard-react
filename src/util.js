@@ -60,9 +60,11 @@ export const calculateTimeDifference = (date1, date2) => {
     return `${diffDays} days`;
   } else if (diffDays >= 1) {
     return `${diffDays} days, ${diffHours.toString().padStart(2, "0")} hours`;
-  } else {
+  } else if (diffHours) {
     return `${diffHours} hours, ${diffMinutes
       .toString()
       .padStart(2, "0")} minutes`;
+  } else {
+    return `${diffMinutes} minutes`;
   }
 };

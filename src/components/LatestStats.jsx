@@ -26,13 +26,14 @@ const LatestStats = ({
       <div className="flex flex-col w-full md:flex-row items-center">
         <div className="w-full md:w-9/12 md:mr-2">
           <div className="flex items-center h-8">
-            <div className="w-2/12 md:w-1/12 font-bold">TV</div>
+            <div className="w-2/12 md:w-1/12 font-bold text-white">TV</div>
             <div className="w-10/12 md:w-11/12 pr-2 pl-4">
               <HorizontalBar total={total} value={tvValue} barColor={"tv"} />
             </div>
+            diffHours
           </div>
           <div className="flex items-center h-8">
-            <div className="w-2/12 md:w-1/12 font-bold">Movies</div>
+            <div className="w-2/12 md:w-1/12 font-bold text-white">Movies</div>
             <div className="w-10/12 md:w-11/12 pr-2 pl-4">
               <HorizontalBar
                 total={total}
@@ -59,7 +60,9 @@ const LatestStats = ({
                   rotate={!valueIncreased}
                 />
               </div>
-              <div className="ml-2">{roundIfDecimal(valueDiffPercentage)}%</div>
+              <div className="ml-2 text-white">
+                {roundIfDecimal(valueDiffPercentage)}%
+              </div>
             </div>
           </Tooltip>
         </div>

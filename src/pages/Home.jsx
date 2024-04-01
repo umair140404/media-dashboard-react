@@ -133,7 +133,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-auto text-center hidden md:block">
-              <div className="flex flex-col">
+              <div className="flex flex-col text-white">
                 <div>Version 2.0</div>
               </div>
             </div>
