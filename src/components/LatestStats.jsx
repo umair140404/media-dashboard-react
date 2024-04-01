@@ -30,7 +30,6 @@ const LatestStats = ({
             <div className="w-10/12 md:w-11/12 pr-2 pl-4">
               <HorizontalBar total={total} value={tvValue} barColor={"tv"} />
             </div>
-            diffHours
           </div>
           <div className="flex items-center h-8">
             <div className="w-2/12 md:w-1/12 font-bold text-white">Movies</div>
